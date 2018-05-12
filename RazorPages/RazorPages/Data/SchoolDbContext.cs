@@ -9,8 +9,8 @@ namespace RazorPages.Data
 {
     public class SchoolDbContext : DbContext
     {
-        public DbSet<Course> Course { get; set; }
-        public DbSet<Student> Student { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Student> Students { get; set; }
 
 
         public SchoolDbContext(DbContextOptions<SchoolDbContext> options) : base(options)

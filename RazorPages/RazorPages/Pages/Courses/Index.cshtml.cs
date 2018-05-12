@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorPages.Data;
 using RazorPages.Models;
 
-namespace RazorPages.Pages.Students
+namespace RazorPages.Pages.Courses
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,19 @@ namespace RazorPages.Pages.Students
             _db = db;
         }
 
-        public IList<Student> Students { get; set; }
+        public IList<Course> Courses { get; set; }
 
         public async Task OnGetAsync()
         {
-            Students = await _db.Students.ToListAsync();
+            Courses = await _db.Courses.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            _db.Courses.Attach(new Course { Id = id }).State = EntityState.Deleted;
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage();
         }
     }
-} 
+}

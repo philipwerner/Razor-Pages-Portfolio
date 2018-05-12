@@ -4,26 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using RazorPages.Data;
 using RazorPages.Models;
 
-namespace RazorPages.Pages.Students
+namespace RazorPages.Pages.Courses
 {
-    public class IndexModel : PageModel
+    public class EditModel : PageModel
     {
         private SchoolDbContext _db;
 
-        public IndexModel(SchoolDbContext db)
+        public EditModel(SchoolDbContext db)
         {
             _db = db;
         }
 
-        public IList<Student> Students { get; set; }
+        public IList<Course> Courses { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Students = await _db.Students.ToListAsync();
         }
     }
-} 
+}

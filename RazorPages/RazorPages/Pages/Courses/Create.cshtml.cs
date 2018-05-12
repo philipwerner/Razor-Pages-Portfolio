@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPages.Data;
 using RazorPages.Models;
 
-namespace RazorPages.Pages.Students
+namespace RazorPages.Pages.Courses
 {
     public class CreateModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace RazorPages.Pages.Students
         }
 
         [BindProperty]
-        public Student Student { get; set; }
+        public Course Course { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -28,7 +28,7 @@ namespace RazorPages.Pages.Students
                 return Page();
             }
 
-            _db.Students.Add(Student);
+            _db.Courses.Add(Course);
             await _db.SaveChangesAsync();
 
             return RedirectToPage("Index");
