@@ -1,0 +1,24 @@
+﻿@page
+@model CreateModel
+@{
+}
+<h1>Add A Student</h1>
+<form method="post">
+    <div>
+        <label asp-for="Student.FirstName"></label>
+        <input asp-for="Student.FirstName" />
+        <span asp-validation-for="Student.FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="Student.LastName"></label>
+        <input asp-for="Student.LastName" />
+        <span asp-validation-for="Student.LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Student.Course"></label>
+        <input asp-for="Student.Course" />
+        <span asp-validation-for="Student.Course"></span>
+    </div>
+    <button type="submit">Save</button>
+    <a asp-page="Index">Cancel</a>
+</form>

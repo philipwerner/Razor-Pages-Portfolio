@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<h1>Students</h1>
+@if (Model.Students.Count > 0)
+{
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Students[0].FirstName)</th>
+            <th>@Html.DisplayNameFor(m => m.Students[0].LastName)</th>
+            <th>@Html.DisplayNameFor(m => m.Students[0].Course)</th>
+            <th>@Html.DisplayNameFor(m => m.Students[0].Veteran)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@Html.DisplayFor(s => student.FirstName)</td>
+                <td>@Html.DisplayFor(s => student.LastName)</td>
+                <td>@Html.DisplayFor(s => student.Course)</td>
+                <td>@Html.DisplayFor(s => student.Veteran)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+} else
+{
+    <p>There are no students enrolled</p>
+
+}
+
+<a asp-page="Create">Add Student</a>
