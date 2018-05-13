@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorPages.Data;
 using RazorPages.Models;
 
-namespace RazorPages.Pages.Courses
+namespace RazorPages.Pages.Students
 {
     public class EditModel : PageModel
     {
@@ -20,18 +20,18 @@ namespace RazorPages.Pages.Courses
         }
 
         [BindProperty]
-        public Course Course { get; set; }
+        public Student Student { get; set; }
 
         [TempData]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Course = await _db.Courses.FindAsync(id);
+            Student = await _db.Students.FindAsync(id);
 
-            if (Course == null)
+            if (Student == null)
             {
-                Message = "Course not found";
+                Message = "Student not found.";
                 return RedirectToPage("Index");
             }
 
@@ -45,21 +45,19 @@ namespace RazorPages.Pages.Courses
                 return Page();
             }
 
-            _db.Attach(Course).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.Attach(Student).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             try
             {
                 await _db.SaveChangesAsync();
-                Message = "Course updated";
+                Message = "Student updated";
             }
             catch (DbUpdateConcurrencyException)
             {
-                Message = "Course not found";
+                Message = "Student not found";
             }
 
             return RedirectToPage("Index");
         }
-
-
     }
 }

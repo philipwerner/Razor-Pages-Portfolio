@@ -25,5 +25,13 @@ namespace RazorPages.Pages.Students
         {
             Students = await _db.Students.ToListAsync();
         }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            _db.Students.Attach(new Student { Id = id }).State = EntityState.Deleted;
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage();
+        }
     }
 } 
