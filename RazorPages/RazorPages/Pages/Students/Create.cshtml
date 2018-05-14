@@ -3,22 +3,30 @@
 @{
 }
 <h1>Add A Student</h1>
-<form method="post">
-    <div>
+<br />
+<form method="post" class="form-group">
+    <div class="form-group">
         <label asp-for="Student.FirstName"></label>
         <input asp-for="Student.FirstName" />
         <span asp-validation-for="Student.FirstName"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Student.LastName"></label>
         <input asp-for="Student.LastName" />
         <span asp-validation-for="Student.LastName"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Student.Course"></label>
         <input asp-for="Student.Course" />
         <span asp-validation-for="Student.Course"></span>
     </div>
-    <button type="submit">Save</button>
-    <a asp-page="Index">Cancel</a>
+    <div class="checkbox">
+        <label asp-for="Student.Veteran"></label>
+        <input type="checkbox" asp-for="Student.Veteran" />
+        <span asp-validation-for="Student.Veteran"></span>
+    </div>
+    <br />
+    <br />
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-page="Index" class="btn btn-danger">Cancel</a>
 </form>

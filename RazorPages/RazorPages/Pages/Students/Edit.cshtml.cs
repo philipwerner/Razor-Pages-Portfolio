@@ -12,22 +12,23 @@ namespace RazorPages.Pages.Students
 {
     public class EditModel : PageModel
     {
-        private SchoolDbContext _db;
-
-        public EditModel(SchoolDbContext db)
-        {
-            _db = db;
-        }
-
+        public int? Id { get; set; }
         [BindProperty]
         public Student Student { get; set; }
+        internal IStudentService StudentService { get; set; }
+
+        public EditModel(IStudentService ss)
+        {
+            StudentService = ss;
+        }
+
 
         [TempData]
         public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Student = await _db.Students.FindAsync(id);
+            Student = await StudentService.FindAsync(id);
 
             if (Student == null)
             {
@@ -45,11 +46,15 @@ namespace RazorPages.Pages.Students
                 return Page();
             }
 
-            _db.Attach(Student).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Student student = await StudentService.FindAsync(Id.GetValueOrDefault());
+            student.FirstName = Student.FirstName;
+            student.LastName = Student.LastName;
+            student.Course = Student.Course;
+            student.Veteran = Student.Veteran;
 
             try
             {
-                await _db.SaveChangesAsync();
+                await StudentService.SaveAsync(student);
                 Message = "Student updated";
             }
             catch (DbUpdateConcurrencyException)

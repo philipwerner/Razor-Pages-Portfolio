@@ -11,7 +11,7 @@ using System;
 namespace RazorPages.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20180512194941_initial")]
+    [Migration("20180514001435_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

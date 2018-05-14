@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPages.Data;
+using RazorPages.Models;
 
 namespace RazorPages
 {
@@ -24,7 +25,8 @@ namespace RazorPages
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ICourseService, CourseService>();
             services.AddDbContext<SchoolDbContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

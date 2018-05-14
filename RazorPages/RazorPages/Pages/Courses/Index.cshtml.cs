@@ -12,24 +12,25 @@ namespace RazorPages.Pages.Courses
 {
     public class IndexModel : PageModel
     {
-        private SchoolDbContext _db;
-
-        public IndexModel(SchoolDbContext db)
-        {
-            _db = db;
-        }
-
+        public int? Id { get; set; }
+        [BindProperty]
+        public Course Course { get; set; }
+        internal ICourseService CourseService { get; }
         public IList<Course> Courses { get; set; }
+
+        public IndexModel(ICourseService cs)
+        {
+            CourseService = cs;
+        }
 
         public async Task OnGetAsync()
         {
-            Courses = await _db.Courses.ToListAsync();
+            Courses = await CourseService.GetAllAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
-            _db.Courses.Attach(new Course { Id = id }).State = EntityState.Deleted;
-            await _db.SaveChangesAsync();
+            await CourseService.OnPostDeleteAsync(Id.GetValueOrDefault());
 
             return RedirectToPage();
         }

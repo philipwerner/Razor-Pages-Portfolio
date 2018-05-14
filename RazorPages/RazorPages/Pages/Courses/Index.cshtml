@@ -3,10 +3,11 @@
 @{
 }
 <h1>Courses</h1>
+<br />
 @if (Model.Courses.Count > 0)
 {
     <form method="post">
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(m => m.Courses[0].Name)</th>
@@ -19,13 +20,14 @@
         <tbody>
             @foreach (var course in Model.Courses)
             {
-                <tr>
-                    <td>@Html.DisplayFor(s => course.Name)</td>
-                    <td>@Html.DisplayFor(s => course.Level)</td>
-                    <td>@Html.DisplayFor(s => course.Instructor)</td>
-                    <td>@Html.DisplayFor(s => course.Language)</td>
-                    <td><button asp-page-handler="Delete" asp-route-id="@course.Id">Delete</button> </td>
-                </tr>
+            <tr>
+                <td>@Html.DisplayFor(s => course.Name)</td>
+                <td>@Html.DisplayFor(s => course.Level)</td>
+                <td>@Html.DisplayFor(s => course.Instructor)</td>
+                <td>@Html.DisplayFor(s => course.Language)</td>
+                <td><button asp-page="Edit" asp-route-id="@course.Id" class="btn btn-info">Edit</button> </td>
+                <td><button asp-page-handler="Delete" asp-route-id="@course.Id" class="btn btn-danger">Delete</button> </td>
+            </tr>
             }
         </tbody>
     </table>

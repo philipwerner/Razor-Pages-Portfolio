@@ -12,24 +12,27 @@ namespace RazorPages.Pages.Students
 {
     public class IndexModel : PageModel
     {
-        private SchoolDbContext _db;
+        public int? Id { get; set; }
+        [BindProperty]
+        public Student Student { get; set; }
+        internal IStudentService StudentService { get; }
+        public IList<Student> Students { get; set; }
 
-        public IndexModel(SchoolDbContext db)
+
+        public IndexModel(IStudentService ss)
         {
-            _db = db;
+            StudentService = ss;
         }
 
-        public IList<Student> Students { get; set; }
 
         public async Task OnGetAsync()
         {
-            Students = await _db.Students.ToListAsync();
+            Students = await StudentService.GetAllAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
-            _db.Students.Attach(new Student { Id = id }).State = EntityState.Deleted;
-            await _db.SaveChangesAsync();
+            await StudentService.OnPostDeleteAsync(Id.GetValueOrDefault());
 
             return RedirectToPage();
         }
